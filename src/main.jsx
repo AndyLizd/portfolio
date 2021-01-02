@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import gsap from "gsap";
+import 'boxicons';
 
 import "./main.css";
 import boxesConfig from "./boxConfig.json";
@@ -8,9 +9,9 @@ import img from './img/glider_thumbnail.PNG';
 function Main() {
 	// config
   const boxCount = boxesConfig.length;
-  const defaultBoxWidth = '8vh';
-	const defaultBoxHeight = '30vh';
-	const selectedBoxWidth = '36vh'; 
+  const defaultBoxWidth = '9vh';
+	const defaultBoxHeight = '35vh';
+	const selectedBoxWidth = '40vh'; 
 	const selectedBoxHeight = selectedBoxWidth; 
 	const defaultHue = 200;
 	const defaultBoxStyle = {
@@ -28,7 +29,7 @@ function Main() {
 	const parseStyleLength = (length) => parseInt(length.substring(0, length.length-2));
 
 	const computeHslColor = (hue, selectIdx, boxCount) => {
-		const lightness = (selectIdx / boxCount) * 0 + (1 - selectIdx / boxCount) * 50;
+		const lightness = (selectIdx / boxCount) * 12 + (1 - selectIdx / boxCount) * 65;
 		return `hsl(${hue}, 0%, ${lightness}%)`
 	}
 
@@ -87,34 +88,50 @@ function Main() {
   };
 
   return (
-		<div>
-			{/* box underneath */}
-			<div className="panel">
-				{boxesConfig.map((value, index) => {
-					return (
+		<div className='page-container'>
+			{/* intro, name & description */}
+			<div className='intro'>
+				<div className='description'>
+					<h1 className='name'>Zhenda</h1>
+					<h1 className='name'>Li</h1>
+					<h6> # Full-Stack, DevOps, A.I.</h6>
+					<div className='icon-container'>
+						<a href="https://github.com/AndyLizd" target="_blank">
+							<box-icon type='logo' color='white' name='github' animation='spin-hover'></box-icon>
+						</a>
+						<a href="https://www.linkedin.com/in/zhenda-li/" target="_blank">
+							<box-icon type='logo' color='white' name='linkedin' animation='tada'></box-icon>
+						</a>
+						<a href="mailto: andylizd@outlook.com" target="_blank">
+							<box-icon name='envelope-open' type='solid' color='white' animation='tada'></box-icon>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div className="feature">
+				{/* box underneath */}
+				<div className='panel'>
+					{boxesConfig.map((value, index) => 
 						<div
 							className={'box hidden'}
-							style={{height:defaultBoxHeight, width:defaultBoxWidth}}
+							style={defaultBoxStyle}
 							onMouseOver={(e) => onMouseEnter(e, index)}
 							onMouseOut={(e) => onMouseLeave(e, index)}
-						></div>
-					);
-				})}
-			</div>
-			{/* box on top */}
-			<div className='panel top'>
-			{boxesConfig.map((value, index) => {
-					const style = {...defaultBoxStyle, backgroundColor: computeHslColor(defaultHue, index, boxCount)};
-					return (
+						/>
+					)}
+				</div>
+		
+				{/* box on top */}
+				<div className='panel top'>
+				{boxesConfig.map((value, index) => 
 						<div
-							style={style}
+							style={{...defaultBoxStyle, backgroundColor: computeHslColor(defaultHue, index, boxCount)}}
 							className={`box box${index}`}
 						>
-							<div className='thumbnail'>
-							</div>
-						</div>
-					);
-				})}
+							<div className='thumbnail'></div>
+						</div>	
+					)}
+				</div>
 			</div>
 		</div>
   );
