@@ -1,18 +1,16 @@
 :root{
 	--first-color: hsl(100, 0%, 96%);
-	--second-color: #7e44b4ef;
+
 }
 
 *{
-    margin: 0;
-    padding: 0;
     background-color: hsl(100, 0%, 10%);
-    box-sizing: border-box;
 }
 
 .page-container{
     display: flex;
     flex-wrap: wrap;
+    background-color: hsl(100, 0%, 10%);
     justify-content: space-evenly;
     align-items: center;
     position: absolute;
@@ -38,6 +36,7 @@
     font-size: 3vh;
     font-weight: 100;
     margin: 1vh;
+    font-family: var(--p-font-family);
     /* font-family: 'Roboto', sans-serif; */
     /* font-family: 'Shadows Into Light', cursive; */
     /* font-family: 'Hanalei Fill', cursive; */
@@ -81,7 +80,6 @@
 .thumbnail{
     width: inherit;
     height: inherit;
-    background-image: url("./img/glider_thumbnail.PNG");
     background-size: cover;
     opacity: 0;
 }

@@ -1,0 +1,30 @@
+:root{
+    --header-font-size: 10vh;
+    --header-font: 'Audiowide';
+    --p-font-size: 2.5vh;
+    --p-font-weight: 100;
+    --p-font-family: 'Open Sans Condensed', 'cursive';
+}
+
+.text{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    color: var(--first-color);
+    padding: 2vh;
+}
+.text .header{
+    font-size: var(--header-font-size);
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 3vw;
+}
+.detail-list{
+    list-style-type: none;
+    font-family: var(--p-font-family);
+    font-size: var(--p-font-size);
+}
+.detail-list .detail{
+    margin-bottom: 1vh;
+}
