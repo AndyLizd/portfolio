@@ -3,14 +3,14 @@ import gsap from "gsap";
 import 'boxicons';
 
 import "./main.css";
-import boxesConfig from "./boxConfig";
+import config from "./boxConfig";
 
 
 // config
-const boxCount = boxesConfig.length;
-const defaultBoxWidth = '9vh';
+const boxCount = config.length;
+const defaultBoxWidth = '9.5vh';
 const defaultBoxHeight = '35vh';
-const selectedBoxWidth = '40vh'; 
+const selectedBoxWidth = '42vh'; 
 const selectedBoxHeight = selectedBoxWidth; 
 const defaultHue = 200;
 const defaultBoxStyle = {
@@ -27,9 +27,9 @@ const computeWidthWeight = (selectIdx, i) => Math.exp(1/Math.abs(selectIdx - i))
 
 const parseStyleLength = (length) => parseInt(length.substring(0, length.length-2));
 
-const computeHslColor = (hue, selectIdx, boxCount) => {
-	const lightness = (selectIdx / boxCount) * 12 + (1 - selectIdx / boxCount) * 65;
-	return `hsl(${hue}, 0%, ${lightness}%)`
+const computeHslColor = (hue, saturation, selectIdx, boxCount) => {
+	const lightness = (selectIdx / boxCount) * 25 + (1 - selectIdx / boxCount) * 82;
+	return `hsl(${hue}, ${saturation}%, ${lightness}%)`
 }
 
 const computeWidthArr = (selectIdx, boxCount, defaultWidthStr, selectedWidthStr) => {
@@ -76,21 +76,30 @@ const onMouseEnter = (e, index) => {
 	console.log(e.target);
 
 	for (let i = 0; i < boxCount; i++) {
-		gsap.to(`.box${i}`, {...defaultBoxStyle, width: widthArr[i], height: heightArr[i], backgroundColor: computeHslColor(defaultHue, i, boxCount)});
+		gsap.to(`.box${i}`, {
+			...defaultBoxStyle, 
+			width: widthArr[i], 
+			height: heightArr[i],
+			backgroundColor: computeHslColor(config[index].hue, 85, i, boxCount)}
+		);
 	}
 	gsap.to(`.box${index} .thumbnail`, {duration: 2.5, opacity: 1.0, overwrite: true, delay: 0.5});
 };
 
 const onMouseLeave = (e, index) => {
 	for (let i = 0; i < boxCount; i++) {
-		gsap.to(`.box${i}`, {...defaultBoxStyle, backgroundColor: computeHslColor(defaultHue, i, boxCount), overwrite: true});
+		gsap.to(`.box${i}`, {
+			...defaultBoxStyle,
+			backgroundColor: computeHslColor(defaultHue, 0, i, boxCount), 
+			overwrite: true
+		});
 		gsap.to(`.box${i} .thumbnail`, {duration: 0.5, opacity: 0, overwrite: true});
 	}
 };
 
 function Main() {
 	useEffect(() => {
-		console.log(boxesConfig);
+		console.log(config);
 	});
 
   return (
@@ -103,13 +112,13 @@ function Main() {
 					<h6> # Full-Stack, DevOps, A.I.</h6>
 					<div className='icon-container'>
 						<a href="https://github.com/AndyLizd" target="_blank">
-							<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
+							<box-icon type='logo' color='black' name='github' animation='flashing-hover'></box-icon>
 						</a>
 						<a href="https://www.linkedin.com/in/zhenda-li/" target="_blank">
-							<box-icon type='logo' color='white' name='linkedin' animation='tada'></box-icon>
+							<box-icon type='logo' color='black' name='linkedin' animation='tada'></box-icon>
 						</a>
 						<a href="mailto: andylizd@outlook.com" target="_blank">
-							<box-icon name='envelope-open' type='solid' color='white' animation='tada'></box-icon>
+							<box-icon name='envelope-open' type='solid' color='black' animation='tada'></box-icon>
 						</a>
 					</div>
 				</div>
@@ -117,7 +126,7 @@ function Main() {
 			<div className="feature">
 				{/* box underneath */}
 				<div className='panel'>
-					{boxesConfig.map((value, index) => 
+					{config.map((value, index) => 
 						<div
 							className={'box hidden'}
 							style={defaultBoxStyle}
@@ -130,13 +139,13 @@ function Main() {
 		
 				{/* box on top */}
 				<div className='panel top'>
-				{boxesConfig.map((value, index) => 
+				{config.map((value, index) => 
 						<div
-							style={{...defaultBoxStyle, backgroundColor: computeHslColor(defaultHue, index, boxCount)}}
+							style={{...defaultBoxStyle, backgroundColor: computeHslColor(defaultHue, 0, index, boxCount)}}
 							className={`box box${index}`}
 							key={index.toString()+' box'}
 						>
-							<div className='thumbnail' style={{backgroundImage: `url(${boxesConfig[index].thumbnail})`}}></div>
+							<div className='thumbnail' style={{backgroundImage: `url(${config[index].thumbnail})`}}></div>
 						</div>	
 					)}
 				</div>

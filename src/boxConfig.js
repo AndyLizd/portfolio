@@ -1,7 +1,7 @@
 const config = [
   {
     name: "sfdispatch",
-    thumbnail: '/img/thumbnail.png',
+    thumbnail: '/img/sfdispatch/sfdispatch_thumbnail.jpg',
     head: 'San Francisco Dispatch',
     summary: 'dispatch & delivery management web app',
     details: [
@@ -11,11 +11,12 @@ const config = [
       'Visualized routes in a map and built user interface in the frontend using React',
     ],
     headerFont: 'Hanalei Fill',
+    hue: 10,
   },
 
   {
     name: "recommender",
-    thumbnail: '/img/thumbnail.png',
+    thumbnail: '/img/recommender/recommender_thumbnail.jpg',
     head: 'Job Recommendation',
     summary: 'job recommendation engine and web service',
     details: [
@@ -26,11 +27,12 @@ const config = [
       'Deployed the web service to AWS EC2',
     ],
     headerFont: 'Hanalei Fill',
+    hue: 50,
   },
 
   {
     name: "glider",
-    thumbnail: '/img/glider/glider_thumbnail.png',
+    thumbnail: '/img/glider/glider_thumbnail.jpg',
     head: 'A.I. Soaring',
     summary: 'artificial intelligent research in aerial robotics decision-making algorithm',
     details: [
@@ -41,12 +43,13 @@ const config = [
       'Published results in AIAA GNC conference as the first author.',
     ],
     headerFont: 'Hanalei Fill',
-    link: 'https://doi.org/10.2514/6.2020-0856'
+    link: 'https://doi.org/10.2514/6.2020-0856',
+    hue: 200,
   },
 
   {
     name: "starlink",
-    thumbnail: '/img/thumbnail.png',
+    thumbnail: '/img/starlink/starlink_thumbnail.jpg',
     head: 'Star Link',
     summary: 'satellite trajectory live animation website based on React.js',
     details: [
@@ -55,11 +58,12 @@ const config = [
       'Animated live trajectory of selected Satellites in a world map using D3 library',
     ],
     headerFont: 'Hanalei Fill',
+    hue: 290,
   },
 
   {
     name: "ganart",
-    thumbnail: '/img/thumbnail.png',
+    thumbnail: '/img/ganart/ganart_thumbnail.jpg',
     head: 'Art by GANs',
     summary: 'classifier and artificial intelligent generator of paintings and visual art',
     details: [
@@ -68,11 +72,12 @@ const config = [
       'Built an auxiliary neural network that maps feature keyworks to the latent space of GANs so that GANs can render artwork with designated features',
     ],
     headerFont: 'Hanalei Fill',
+    hue: 60,
   },
 
   {
     name: "education",
-    thumbnail: '/img/thumbnail.png',
+    thumbnail: '/img/education/education_thumbnail.jpg',
     head: 'Education',
     summary: 'Gatech C.S. & Penn State Aero.',
     details: [
@@ -80,11 +85,12 @@ const config = [
       'Pennsylvania State University, B.S & M.S. in Aerospace Engineering',
     ],
     headerFont: 'Hanalei Fill',
+    hue: 320,
   },
 
   {
-    name: "skill",
-    thumbnail: '/img/thumbnail.png',
+    name: "skills",
+    thumbnail: '/img/skills/skills_thumbnail.jpg',
     head: 'Skills',
     summary: 'click thumbnail to find out what I\'ve got',
     details: [
@@ -94,11 +100,12 @@ const config = [
       'algorithm, data structure, OOD, machine learning, deep reinforcement learning, big data, robotics, optimization, numerical method',
     ],
     headerFont: 'Hanalei Fill',
+    hue: 140,
   },
 
   {
     name: "others",
-    thumbnail: '/img/thumbnail.png',
+    thumbnail: '/img/others/others_thumbnail.jpg',
     head: 'Certification, Reward, & More',
     summary: '',
     details: [
@@ -108,6 +115,7 @@ const config = [
       'Schreyer Honors Scholar'
     ],
     headerFont: 'Hanalei Fill',
+    hue: 168,
   },
 ];
 
