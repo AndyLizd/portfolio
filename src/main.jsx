@@ -28,7 +28,7 @@ const computeWidthWeight = (selectIdx, i) => Math.exp(1/Math.abs(selectIdx - i))
 const parseStyleLength = (length) => parseInt(length.substring(0, length.length-2));
 
 const computeHslColor = (hue, saturation, selectIdx, boxCount) => {
-	const lightness = (selectIdx / boxCount) * 18 + (1 - selectIdx / boxCount) * 75;
+	const lightness = (selectIdx / boxCount) * 15 + (1 - selectIdx / boxCount) * 75;
 	return `hsl(${hue}, ${saturation}%, ${lightness}%)`
 }
 
@@ -80,10 +80,23 @@ const onMouseEnter = (e, index) => {
 			...defaultBoxStyle, 
 			width: widthArr[i], 
 			height: heightArr[i],
-			backgroundColor: computeHslColor(config[index].hue, 85, i, boxCount)}
+			backgroundColor: computeHslColor(config[index].hue, 85, i, boxCount)},
 		);
 	}
-	gsap.to(`.box${index} .thumbnail`, {duration: 2.5, opacity: 1.0, overwrite: true, delay: 0.5});
+
+	gsap.to(`.box${index} .thumbnail`, {
+		duration: 2.5, 
+		opacity: 1.0, 
+		overwrite: true, 
+		delay: 0.5
+	});
+
+	gsap.to(`.box.hidden`, {
+		duration: 1,
+		opacity: 1,
+		boxShadow: '0px 0px 80px 15px rgba(255,255,255,0.3)',
+	}); 
+
 };
 
 const onMouseLeave = (e, index) => {
@@ -91,9 +104,16 @@ const onMouseLeave = (e, index) => {
 		gsap.to(`.box${i}`, {
 			...defaultBoxStyle,
 			backgroundColor: computeHslColor(defaultHue, 0, i, boxCount), 
+			boxShadow: '',
 			overwrite: true
 		});
 		gsap.to(`.box${i} .thumbnail`, {duration: 0.5, opacity: 0, overwrite: true});
+		
+		gsap.to('.box.hidden', {
+			duration: 1,
+			opacity: 0,
+			boxShadow: '',
+		}); 
 	}
 };
 
@@ -128,7 +148,7 @@ function Main() {
 				<div className='panel'>
 					{config.map((value, index) => 
 						<div
-							className={'box hidden'}
+							className={`box hidden`}
 							style={defaultBoxStyle}
 							onMouseOver={(e) => onMouseEnter(e, index)}
 							onMouseOut={(e) => onMouseLeave(e, index)}
@@ -146,6 +166,7 @@ function Main() {
 							key={index.toString()+' box'}
 						>
 							<div className='thumbnail' style={{backgroundImage: `url(${config[index].thumbnail})`}}></div>
+							{/* <img src={`url(${config[index].thumbnail})`} alt="" /> */}
 						</div>	
 					)}
 				</div>
