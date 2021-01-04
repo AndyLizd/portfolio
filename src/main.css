@@ -1,12 +1,17 @@
 :root{
 	--first-color: hsl(100, 0%, 96%);
-
+    --second-color: hsl(100, 0%, 10%);
+    --p-font-family: 'Open Sans Condensed', 'cursive';
 }
+
+/* *{
+    background-color: var(--second-color);
+} */
 
 .page-container{
     display: flex;
     flex-wrap: wrap;
-    background-color: hsl(100, 0%, 10%);
+    background-color: var(--second-color);
     justify-content: space-evenly;
     align-items: center;
     position: absolute;
@@ -33,11 +38,6 @@
     font-weight: 100;
     margin: 1vh;
     font-family: var(--p-font-family);
-    /* font-family: 'Roboto', sans-serif; */
-    /* font-family: 'Shadows Into Light', cursive; */
-    /* font-family: 'Hanalei Fill', cursive; */
-    /* font-family: 'Skranji', cursive; */
-    /* font-family: 'Audiowide', cursive; */
 }
 .intro .description .name {
     font-weight: 800;

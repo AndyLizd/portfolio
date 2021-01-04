@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 import gsap from "gsap";
 import 'boxicons';
 
@@ -8,9 +9,9 @@ import config from "./boxConfig";
 
 // config
 const boxCount = config.length;
-const defaultBoxWidth = '9.5vh';
-const defaultBoxHeight = '35vh';
-const selectedBoxWidth = '42vh'; 
+const defaultBoxWidth = '9vh';
+const defaultBoxHeight = '34vh';
+const selectedBoxWidth = '40vh'; 
 const selectedBoxHeight = selectedBoxWidth; 
 const defaultHue = 200;
 const defaultBoxStyle = {
@@ -69,12 +70,12 @@ const computeHeightArr = (selectIdx, boxCount, defaultHeightStr, selectedHeightS
 	return heightArr;
 }
 
-const onMouseEnter = (e, index) => {
+const onMouseEnter = (e, index, setHeaderState) => {
+	setHeaderState(index);
+	
 	const widthArr = computeWidthArr(index, boxCount, defaultBoxWidth, selectedBoxWidth);
 	const heightArr = computeHeightArr(index, boxCount, defaultBoxHeight, selectedBoxHeight);
 	
-	console.log(e.target);
-
 	for (let i = 0; i < boxCount; i++) {
 		gsap.to(`.box${i}`, {
 			...defaultBoxStyle, 
@@ -85,21 +86,24 @@ const onMouseEnter = (e, index) => {
 	}
 
 	gsap.to(`.box${index} .thumbnail`, {
-		duration: 2.5, 
+		duration: 1.5, 
 		opacity: 1.0, 
 		overwrite: true, 
 		delay: 0.5
 	});
 
-	gsap.to(`.box.hidden`, {
-		duration: 1,
+	gsap.to(`.panel.hidden`, {
+		duration: 1.5,
 		opacity: 1,
-		boxShadow: '0px 0px 80px 15px rgba(255,255,255,0.3)',
+		boxShadow: `0 10.5px 60.2px -10px rgba(255,255,255, 0.349),
+								${-50 + index/boxCount*2*50}px 14.6px 232.2px -10px rgba(255,255,255, 0.497),	
+								${-100 + index/boxCount*2*100}px 28px 382px -10px rgba(255,255,255, 0.84)`,
+		overwrite: true,
 	}); 
 
 };
 
-const onMouseLeave = (e, index) => {
+const onMouseLeave = (e, index, setHeaderState) => {
 	for (let i = 0; i < boxCount; i++) {
 		gsap.to(`.box${i}`, {
 			...defaultBoxStyle,
@@ -109,49 +113,78 @@ const onMouseLeave = (e, index) => {
 		});
 		gsap.to(`.box${i} .thumbnail`, {duration: 0.5, opacity: 0, overwrite: true});
 		
-		gsap.to('.box.hidden', {
-			duration: 1,
+		gsap.to('.panel.hidden', {
+			duration: 1.5,
 			opacity: 0,
-			boxShadow: '',
+			overwrite: true,
 		}); 
 	}
+	setHeaderState(-1);
 };
+
+const onClickFeature = (e, index, history) => {
+	console.log('hello')
+	history.push(`/${config[index].name}`)
+};
+
+const renderName = () => (
+	<div className='description'>
+		<h1 className='name'>Zhenda</h1>
+		<h1 className='name'>Li</h1>
+		<h6> # Full-Stack, DevOps, A.I.</h6>
+		<div className='icon-container'>
+			<a href="https://github.com/AndyLizd" target="_blank">
+				<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
+			</a>
+			<a href="https://www.linkedin.com/in/zhenda-li/" target="_blank">
+				<box-icon type='logo' color='white' name='linkedin' animation='tada'></box-icon>
+			</a>
+			<a href="mailto: andylizd@outlook.com" target="_blank">
+				<box-icon name='envelope-open' type='solid' color='white' animation='tada'></box-icon>
+			</a>
+		</div>
+	</div>
+)
+
+const renderFeatureSummary = (index) => (
+	<div className='description'>
+		<h1 
+			style={{color: 'white', fontSize:'6vh', fontFamily: config[index].headerFont}}
+		>
+			{config[index].head}
+		</h1>
+		<h6 style={{color: 'white'}}>{`- ${config[index].summary}`}</h6>
+	</div>
+)
+
 
 function Main() {
 	useEffect(() => {
 		console.log(config);
-	});
+	}, []);
+
+	// headerState: -1, show name modules
+	const [headerState, setHeaderState] = useState(-1);
+
+	const history = useHistory();
 
   return (
 		<div className='page-container'>
 			{/* intro, name & description */}
 			<div className='intro'>
-				<div className='description'>
-					<h1 className='name'>Zhenda</h1>
-					<h1 className='name'>Li</h1>
-					<h6> # Full-Stack, DevOps, A.I.</h6>
-					<div className='icon-container'>
-						<a href="https://github.com/AndyLizd" target="_blank">
-							<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
-						</a>
-						<a href="https://www.linkedin.com/in/zhenda-li/" target="_blank">
-							<box-icon type='logo' color='white' name='linkedin' animation='tada'></box-icon>
-						</a>
-						<a href="mailto: andylizd@outlook.com" target="_blank">
-							<box-icon name='envelope-open' type='solid' color='white' animation='tada'></box-icon>
-						</a>
-					</div>
-				</div>
+				{headerState === -1? renderName(): renderFeatureSummary(headerState)}
 			</div>
+
 			<div className="feature">
 				{/* box underneath */}
-				<div className='panel'>
+				<div className='panel hidden'>
 					{config.map((value, index) => 
 						<div
 							className={`box hidden`}
 							style={defaultBoxStyle}
-							onMouseOver={(e) => onMouseEnter(e, index)}
-							onMouseOut={(e) => onMouseLeave(e, index)}
+							onMouseOver={e => onMouseEnter(e, index, setHeaderState)}
+							onMouseOut={e => onMouseLeave(e, index, setHeaderState)}
+							onClick={e => onClickFeature(e, index, history)}
 							key={index.toString()+' box hident'}
 						/>
 					)}
@@ -165,8 +198,14 @@ function Main() {
 							className={`box box${index}`}
 							key={index.toString()+' box'}
 						>
-							<div className='thumbnail' style={{backgroundImage: `url(${config[index].thumbnail})`}}></div>
-							{/* <img src={`url(${config[index].thumbnail})`} alt="" /> */}
+							<div 
+								className='thumbnail' 
+								style={{
+									backgroundImage: `url(${config[index].thumbnail})`,
+									// filter: 'grayscale(100%)'
+								}}
+							>
+							</div>
 						</div>	
 					)}
 				</div>

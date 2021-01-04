@@ -24,7 +24,7 @@ function App() {
       <Route path='/recommender' exact component={Recommender}/>
       <Route path='/ganart' exact component={GanArt}/>
       <Route path='/starlink' exact component={Starlink}/>
-      <Route path='/dev/template' exact component={Template}/>
+      {/* <Route path='/dev/template' exact component={Template({headerFontFamily: 'cursive', index: 0})}/> */}
     </div>
   );
 }

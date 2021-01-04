@@ -1,10 +1,10 @@
 :root{
     --header-font-size: 10vh;
-    --header-font: 'Audiowide';
     --p-font-size: 2.5vh;
     --p-font-weight: 100;
-    --p-font-family: 'Open Sans Condensed', 'cursive';
 }
+
+
 
 .text{
     position: absolute;
