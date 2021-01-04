@@ -28,7 +28,7 @@ const computeWidthWeight = (selectIdx, i) => Math.exp(1/Math.abs(selectIdx - i))
 const parseStyleLength = (length) => parseInt(length.substring(0, length.length-2));
 
 const computeHslColor = (hue, saturation, selectIdx, boxCount) => {
-	const lightness = (selectIdx / boxCount) * 25 + (1 - selectIdx / boxCount) * 82;
+	const lightness = (selectIdx / boxCount) * 18 + (1 - selectIdx / boxCount) * 75;
 	return `hsl(${hue}, ${saturation}%, ${lightness}%)`
 }
 
@@ -112,13 +112,13 @@ function Main() {
 					<h6> # Full-Stack, DevOps, A.I.</h6>
 					<div className='icon-container'>
 						<a href="https://github.com/AndyLizd" target="_blank">
-							<box-icon type='logo' color='black' name='github' animation='flashing-hover'></box-icon>
+							<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
 						</a>
 						<a href="https://www.linkedin.com/in/zhenda-li/" target="_blank">
-							<box-icon type='logo' color='black' name='linkedin' animation='tada'></box-icon>
+							<box-icon type='logo' color='white' name='linkedin' animation='tada'></box-icon>
 						</a>
 						<a href="mailto: andylizd@outlook.com" target="_blank">
-							<box-icon name='envelope-open' type='solid' color='black' animation='tada'></box-icon>
+							<box-icon name='envelope-open' type='solid' color='white' animation='tada'></box-icon>
 						</a>
 					</div>
 				</div>
