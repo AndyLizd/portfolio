@@ -2,6 +2,7 @@ const config = [
   {
     name: "sfdispatch",
     thumbnail: '/img/sfdispatch/sfdispatch_thumbnail.jpg',
+    thumbnailType: 'img',
     head: 'San Francisco Dispatch',
     summary: 'dispatch & delivery management web app',
     details: [
@@ -17,6 +18,7 @@ const config = [
   {
     name: "recommender",
     thumbnail: '/img/recommender/recommender_thumbnail.jpg',
+    thumbnailType: 'img',
     head: 'Job Recommendation',
     summary: 'job recommendation engine and web service',
     details: [
@@ -33,6 +35,7 @@ const config = [
   {
     name: "glider",
     thumbnail: '/img/glider/glider_thumbnail.jpg',
+    thumbnailType: 'img',
     head: 'A.I. Soaring',
     summary: 'A.I. research in aerial robotics decision-making algorithm',
     details: [
@@ -50,6 +53,7 @@ const config = [
   {
     name: "starlink",
     thumbnail: '/img/starlink/starlink_thumbnail.jpg',
+    thumbnailType: 'img',
     head: 'Star Link',
     summary: 'satellite trajectory live animation website based on React',
     details: [
@@ -64,6 +68,7 @@ const config = [
   {
     name: "ganart",
     thumbnail: '/img/ganart/ganart_thumbnail.jpg',
+    thumbnailType: 'img',
     head: 'Art by GANs',
     summary: 'artificial intelligent generator of paintings and visual art',
     details: [
@@ -78,6 +83,7 @@ const config = [
   {
     name: "education",
     thumbnail: '/img/education/education_thumbnail.jpg',
+    thumbnailType: 'img',
     head: 'Education',
     summary: 'M.S. in Computer Science, Georgia Tech',
     details: [
@@ -90,14 +96,18 @@ const config = [
 
   {
     name: "skills",
-    thumbnail: '/img/skills/skills_thumbnail.jpg',
+    // thumbnail: '/img/skills/skills_thumbnail.jpg',
+    thumbnail: '/Videos/ink_2.mp4',
+    thumbanilType: 'video',
     head: 'Skills',
     summary: 'what I\'ve got',
     details: [
       'Java, Python, JavaScript, Scala, HTML, CSS, React, Node.js, Express, Spring, Django',
       'Pytorch, Tensorflow, Matlab, MySQL, MongoDB',
-      'Linux, git, Hadoop with Hive, Pig, and etc., Spark, AWS with Beanstalk, Codepipeline, Lambda, Sagemaker, and etc., Docker, Kubernetes',
-      'algorithm, data structure, OOD, machine learning, deep reinforcement learning, big data, robotics, optimization, numerical method',
+      'Linux, git, Hadoop with Hive, Pig, and etc., Spark',
+      'AWS with Beanstalk, Codepipeline, Lambda, Sagemaker, and etc., Docker, Kubernetes',
+      'algorithm, data structure, OOD, machine learning, deep reinforcement learning', 
+      'big data, robotics, optimization, numerical method',
     ],
     headerFont: 'Open Sans Condensed',
     hue: 140,
@@ -106,13 +116,14 @@ const config = [
   {
     name: "others",
     thumbnail: '/img/others/others_thumbnail.jpg',
-    head: 'Certification & Awards',
+    thumbnailType: 'img',
+    head: 'Certification, Awards, & Others',
     summary: 'click thumbnail to find out more',
     details: [
       'AWS Certified Developer – Associate',
-      'Teaching assistant for Advanced Programming for Engineers, Big Data for Health Informatics, and etc.',
       '3rd place in 2018 American Helicopter Society Design Competition in the U.S. undergraduate division',
-      'Schreyer Honors Scholar'
+      'Schreyer Honors Scholar',
+      'Teaching assistant for Advanced Programming for Engineers, Big Data for Health Informatics, and etc.',
     ],
     headerFont: 'Big Shoulders Inline Text',
     hue: 168,

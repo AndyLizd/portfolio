@@ -6,9 +6,12 @@ import './styles/template.css';
 
 
 function Template({props}) {
+
+  const fontFamily = 'Open Sans Condensed'; //props.headerFontFamily;
+
   return (
     <div className='text'>
-      <h1 className='header' style={{fontFamily: props.headerFontFamily}}>
+      <h1 className='header' style={{fontFamily: fontFamily, fontSize: '8vh'}}>
         {config[props.index].head}
       </h1>
       <ul className='detail-list'>

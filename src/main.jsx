@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom';
 import gsap from "gsap";
 import 'boxicons';
 
 import "./main.css";
 import config from "./boxConfig";
 
+import Features from './features/features';
 
 // config
 const boxCount = config.length;
@@ -81,8 +81,8 @@ const onMouseEnter = (e, index, setHeaderState) => {
 			...defaultBoxStyle, 
 			width: widthArr[i], 
 			height: heightArr[i],
-			backgroundColor: computeHslColor(config[index].hue, 85, i, boxCount)},
-		);
+			backgroundColor: computeHslColor(config[index].hue, 85, i, boxCount),
+		});
 	}
 
 	gsap.to(`.box${index} .thumbnail`, {
@@ -122,13 +122,12 @@ const onMouseLeave = (e, index, setHeaderState) => {
 	setHeaderState(-1);
 };
 
-const onClickFeature = (e, index, history) => {
-	console.log('hello')
-	history.push(`/${config[index].name}`)
+const onClickFeature = (e, index, setPageState) => {
+	setPageState('features');
 };
 
 const renderName = () => (
-	<div className='description'>
+	<div className='description name-bundle'>
 		<h1 className='name'>Zhenda</h1>
 		<h1 className='name'>Li</h1>
 		<h6> # Full-Stack, DevOps, A.I.</h6>
@@ -149,7 +148,14 @@ const renderName = () => (
 const renderFeatureSummary = (index) => (
 	<div className='description'>
 		<h1 
-			style={{color: 'white', fontSize:'6vh', fontFamily: config[index].headerFont}}
+			style={{
+				color: 'white', 
+				fontSize: '6vh', 
+				fontFamily: config[index].headerFont, 
+				textAlign: 'center',
+				margin: 'auto',
+				marginBottom: '2vh',
+			}}
 		>
 			{config[index].head}
 		</h1>
@@ -165,10 +171,16 @@ function Main() {
 
 	// headerState: -1, show name modules
 	const [headerState, setHeaderState] = useState(-1);
+	// jumpToState: -1, show home page
+	const [pageState, setPageState] = useState('home');
 
-	const history = useHistory();
 
   return (
+		<>
+		{
+		(pageState === 'features') ?
+		< Features props={{startSection: config[headerState].name}}/>
+		:
 		<div className='page-container'>
 			{/* intro, name & description */}
 			<div className='intro'>
@@ -181,10 +193,10 @@ function Main() {
 					{config.map((value, index) => 
 						<div
 							className={`box hidden`}
-							style={defaultBoxStyle}
+							style={{...defaultBoxStyle, cursor:'pointer'}}
 							onMouseOver={e => onMouseEnter(e, index, setHeaderState)}
 							onMouseOut={e => onMouseLeave(e, index, setHeaderState)}
-							onClick={e => onClickFeature(e, index, history)}
+							onClick={e => onClickFeature(e, index, setPageState)}
 							key={index.toString()+' box hident'}
 						/>
 					)}
@@ -194,23 +206,45 @@ function Main() {
 				<div className='panel top'>
 				{config.map((value, index) => 
 						<div
-							style={{...defaultBoxStyle, backgroundColor: computeHslColor(defaultHue, 0, index, boxCount)}}
+							style={{
+								...defaultBoxStyle, 
+								backgroundColor: computeHslColor(defaultHue, 0, index, boxCount),
+							}}
 							className={`box box${index}`}
 							key={index.toString()+' box'}
 						>
-							<div 
-								className='thumbnail' 
+							{/* <div className='thumbnail' 
 								style={{
 									backgroundImage: `url(${config[index].thumbnail})`,
 									// filter: 'grayscale(100%)'
 								}}
-							>
-							</div>
+							/> */}
+							
+							{
+								(config[index].thumbanilType === 'video' ?
+									<div className='thumbnail'>
+										<video 
+											src={`${config[index].thumbnail}`} autoPlay muted loop 
+											style={{height:'inherit'}}
+										/>
+									</div>
+									:
+									<div className='thumbnail' 
+										style={{
+											backgroundImage: `url(${config[index].thumbnail})`,
+											// filter: 'grayscale(100%)'
+										}}
+									/> 
+								)
+							}
+
 						</div>	
 					)}
 				</div>
 			</div>
 		</div>
+		}
+		</>
   );
 }
 

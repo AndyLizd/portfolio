@@ -1,0 +1,9 @@
+.feature-page section {
+    width: auto;
+    overflow: hidden;
+    border: 0.1rem solid white;
+}
+
+.button {
+    display: inline-block;
+}
