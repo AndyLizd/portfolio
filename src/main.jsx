@@ -29,7 +29,7 @@ const computeWidthWeight = (selectIdx, i) => Math.exp(1/Math.abs(selectIdx - i))
 const parseStyleLength = (length) => parseInt(length.substring(0, length.length-2));
 
 const computeHslColor = (hue, saturation, selectIdx, boxCount) => {
-	const lightness = (selectIdx / boxCount) * 15 + (1 - selectIdx / boxCount) * 75;
+	const lightness = (selectIdx / boxCount) * 10 + (1 - selectIdx / boxCount) * 75;
 	return `hsl(${hue}, ${saturation}%, ${lightness}%)`
 }
 
@@ -101,9 +101,11 @@ const onMouseEnter = (e, index, setHeaderState) => {
 		overwrite: true,
 	}); 
 
+	gsap.to('.page-container .intro', {duration:0.25, opacity: 1, ease:'power4'})
+
 };
 
-const onMouseLeave = (e, index, setHeaderState) => {
+const onMouseLeave = (e, setHeaderState) => {
 	for (let i = 0; i < boxCount; i++) {
 		gsap.to(`.box${i}`, {
 			...defaultBoxStyle,
@@ -111,7 +113,7 @@ const onMouseLeave = (e, index, setHeaderState) => {
 			boxShadow: '',
 			overwrite: true
 		});
-		gsap.to(`.box${i} .thumbnail`, {duration: 0.5, opacity: 0, overwrite: true});
+		gsap.to(`.box${i} .thumbnail`, {duration: 0.25, opacity: 0.0, overwrite: true});
 		
 		gsap.to('.panel.hidden', {
 			duration: 1.5,
@@ -119,6 +121,9 @@ const onMouseLeave = (e, index, setHeaderState) => {
 			overwrite: true,
 		}); 
 	}
+
+	gsap.from('.page-container .intro', {duration:0.5, opacity: 0, ease:'power4'})
+
 	setHeaderState(-1);
 };
 
@@ -131,16 +136,22 @@ const renderName = () => (
 		<h1 className='name'>Zhenda</h1>
 		<h1 className='name'>Li</h1>
 		<h6> # Full-Stack, DevOps, A.I.</h6>
-		<div className='icon-container'>
-			<a href="https://github.com/AndyLizd" target="_blank">
-				<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
-			</a>
-			<a href="https://www.linkedin.com/in/zhenda-li/" target="_blank">
-				<box-icon type='logo' color='white' name='linkedin' animation='tada'></box-icon>
-			</a>
-			<a href="mailto: andylizd@outlook.com" target="_blank">
-				<box-icon name='envelope-open' type='solid' color='white' animation='tada'></box-icon>
-			</a>
+		<div style={{display:'flex'}}>
+			<div className="icon">
+				<a href="https://github.com/AndyLizd" target="_blank">
+					<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
+				</a>
+			</div>
+			<div className="icon">
+				<a href="https://www.linkedin.com/in/zhenda-li/" target="_blank">
+					<box-icon type='logo' color='white' name='linkedin' animation='tada'></box-icon>
+				</a>
+			</div>
+			<div className="icon">
+				<a href="mailto: andylizd@outlook.com" target="_blank">
+					<box-icon name='envelope-open' type='solid' color='white' animation='tada'></box-icon>
+				</a>
+			</div>
 		</div>
 	</div>
 )
@@ -151,7 +162,7 @@ const renderFeatureSummary = (index) => (
 			style={{
 				color: 'white', 
 				fontSize: '6vh', 
-				fontFamily: config[index].headerFont, 
+				fontFamily: 'Big Shoulders Inline Text', 
 				textAlign: 'center',
 				margin: 'auto',
 				marginBottom: '2vh',
@@ -165,15 +176,35 @@ const renderFeatureSummary = (index) => (
 
 
 function Main() {
-	useEffect(() => {
-		console.log(config);
-	}, []);
-
+	
 	// headerState: -1, show name modules
 	const [headerState, setHeaderState] = useState(-1);
 	// jumpToState: -1, show home page
 	const [pageState, setPageState] = useState('home');
+	// loadingState: 1, loading,
+	const [loadingState, setLoadingState] = useState(1);
+	
+	useEffect(() => {
+		
+		gsap.defaults({overwrite: true});
 
+		gsap.from('.page-container .intro .name', {duration: 1.5, opacity: 0.0, y: '-5vh', ease:'power4', stagger: 0.5});
+		gsap.from('.page-container .intro h6', {duration: 2.0, opacity: 0, x:'3vw', ease:'slow', delay: 1.5});
+		gsap.from('.page-container .intro .icon', {duration: 1.0, y:'-3vh', opacity: 0, stagger: 0.2, ease:'bounce', delay:0.5});
+		
+		for (let i = 0; i < boxCount; i++){
+			gsap.from(`.page-container .panel.top .box${i}`, {
+				duration:2.0, opacity: 0.0, y:`${(2*(i%2)-1)*2.5}vh`, ease:'power4', delay: 4.0,
+			});
+		}
+
+		setTimeout(() => setLoadingState(0), 6000);
+	}, []);
+
+	useEffect(() => {
+	  if (headerState === -1)
+		gsap.to('.page-container .intro', {duration: 2.0, opacity: 1})
+	}, [headerState]);
 
   return (
 		<>
@@ -189,18 +220,21 @@ function Main() {
 
 			<div className="feature">
 				{/* box underneath */}
-				<div className='panel hidden'>
-					{config.map((value, index) => 
-						<div
-							className={`box hidden`}
-							style={{...defaultBoxStyle, cursor:'pointer'}}
-							onMouseOver={e => onMouseEnter(e, index, setHeaderState)}
-							onMouseOut={e => onMouseLeave(e, index, setHeaderState)}
-							onClick={e => onClickFeature(e, index, setPageState)}
-							key={index.toString()+' box hident'}
-						/>
-					)}
-				</div>
+				{(loadingState === 1) ?
+					<></>
+					:
+					<div className='panel hidden' onMouseOut={e => onMouseLeave(e, setHeaderState)}>
+						{config.map((value, index) => 
+							<div
+								className={`box hidden`}
+								style={{...defaultBoxStyle, cursor:'pointer'}}
+								onMouseOver={e => onMouseEnter(e, index, setHeaderState)}
+								onClick={e => onClickFeature(e, index, setPageState)}
+								key={index.toString()+' box hident'}
+							/>
+						)}
+					</div>
+				}
 		
 				{/* box on top */}
 				<div className='panel top'>

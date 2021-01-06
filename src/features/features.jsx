@@ -1,4 +1,6 @@
 import { React, useEffect, useRef } from "react";
+import gsap from "gsap";
+import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import Template from './template';
 import config from '../boxConfig';
@@ -42,12 +44,20 @@ function Features({props}) {
 			{/* education */}
 			<section className='education' ref={refAggregate['education']}>
 				<span ref={refAggregate['others']}></span>
-				<div className='words' style={{border: '0.1rem solid white', left: '5vw', top: '50vh', transform: 'translateY(-50%)'}}>
+				<div className='words' style={{
+					position: 'absolute',
+					border: '0.1rem solid white', 
+					left: '5vw', 
+					top: '50vh', 
+					transform: 'translateY(-50%)',
+					paddingRight: '25px',
+					zIndex: 15,
+				}}>
 					<Template 
-						props={{ index: index.education, headerFontFamily: config[index.education].headerFont}} 
+						props={{ index: index.education}} 
 					/>
 					<Template 
-						props={{ index: index.others, headerFontFamily: config[index.others].headerFont}}
+						props={{ index: index.others}}
 					/>
 				</div>
 				<video 
@@ -76,115 +86,111 @@ function Features({props}) {
 
 
 			{/* skills */}
-			<section className="skills" ref={refAggregate['skills']}>
-				<div className='words' style={{right: '2vw', top: '15vh'}}>
-				<Template 
-					props={{ index: index.skills, headerFontFamily: config[index.skills].headerFont}}
-				/>
+			<section ref={refAggregate['skills']}>
+				<div style={{height:'75vh', marginTop:'5vh'}}>
+					<img src="/img/skills/skills.jpg" style={{height:'inherit',}} alt=""/>
 				</div>
-				<img src='/img/skills/skills.jpg' style={{height: '70vh', left:'2vw', bottom: '0vw'}}/>
+				<div className='words' style={{marginTop:'50vh'}}>
+					<Template 
+						props={{ index: index.skills}}
+					/>
+				</div>
 			</section>
 
 
 			{/* projects */}
 			{/* SF Dispatch */}
-			<section className='sfdispatch' ref={refAggregate['sfdispatch']}>
-				<div className='words' style={{left: '-1vw', bottom: '5vh', maxWidth: '40vw'}}>
+			<section ref={refAggregate['sfdispatch']}>
+				<div className='words' style={{marginTop:'10vh', maxWidth:'36vw'}}>
 					<Template 
-						props={{ index: index.sfdispatch, headerFontFamily: config[index.sfdispatch].headerFont}}
+						props={{ index: index.sfdispatch}}
 					/>
 				</div>
-				<video 
-					src='/Videos/sfdispatch.mp4' autoPlay muted loop 
-					style={{
-						position: 'absolute',
-						right: '2vw',
-						top: '50vh',
-						transform: 'translateY(-50%)',
-						zIndex: -1,
-						height: '60vh', 
-					}}
-				/>
+				<div style={{marginTop:'30vh', height: '65vh'}}>
+					<video 
+						src='/Videos/sfdispatch.mp4' autoPlay muted loop 
+						style={{height:'inherit'}}
+					/>
+				</div>
 			</section>
 
 			{/* Recommender */}
-			<section className='recommender' ref={refAggregate['recommender']} >
-				<div className='words' style={{right: '5vw', bottom: '10vh'}}>
+			<section ref={refAggregate['recommender']}>
+				<div style={{height:'70vh', marginTop:'5vh'}}>
+					<img src="/img/recommender/recommender.jpg" style={{height:'inherit',}} alt=""/>
+				</div>
+				<div className='words' style={{marginTop:'50vh'}}>
 					<Template 
-						props={{ index: index.recommender, headerFontFamily: config[index.recommender].headerFont}}
+						props={{ index: index.recommender}}
 					/>
 				</div>
-				<img 
-					src='/img/recommender/recommender.jpg' 
-					style={{
-						top: '5vh',
-						height: '70vh',
-						left: '3vw',
-					}}
-				/>
 			</section>
 
+
 			{/* A.I. Soaring */}
-			<section className="glider" ref={refAggregate['glider']}>
-				<div className='words' style={{top: '10vh', left: '5vw'}}>
+			<section ref={refAggregate['glider']}>
+				<div className='words' style={{marginTop: '0vh'}}>
 					<Template 
 						props={{ index: index.glider, headerFontFamily: config[index.glider].headerFont}}
 					/>
-				</div>
-				<img
-					src="img/glider/glider.jpg"
-					style={{
-						height: "85vh",
-						right: "10vw",
-						top: "10vh",
-					}}
-				/>
 				<img 
 					src='img/glider/glider_2.png' 
 					style={{
-						height: '40vh',
-						left: '8vw',
-						bottom: '0vh',
+						marginTop: '5vh',
+						marginLeft: '8vh',
+						height: '45vh',
 						filter: 'grayscale(100%)',
 					}}	 
 				/>
-
+				</div>
+				<div style={{height:'100vh', marginTop:'0vh'}}>
+					<img src="/img/glider/glider.jpg" style={{height:'inherit',}} alt=""/>
+				</div>
 			</section>
 
 			{/* star link */}
-			<section className="starlink" ref={refAggregate['starlink']}>
-				<div className="words" style={{top: '25vh', right: '10vw'}}>
+			<section ref={refAggregate['starlink']}>
+				<div style={{height:'70vh', marginTop:'5vh'}}>
+					<img src="/img/starlink/moon.png" style={{height:'inherit',}} alt=""/>
+				</div>
+				<div className='words' style={{marginTop:'45vh'}}>
 					<Template 
-						props={{ index: index.starlink, headerFontFamily: config[index.starlink].headerFont}}
+						props={{ index: index.starlink}}
 					/>
 				</div>
-				<img 
-					src='/img/starlink/moon.png' 
-					style={{
-						height: '75vh',
-						left: '5vw',
-						top: '-20vh',
-					}}
-				/>
 			</section>
 
+
 			{/* Art by GANs */}
-			<section className="ganart" style={{height: '200vh'}} ref={refAggregate['ganart']}>
+			{/* star link */}
+			<section ref={refAggregate['ganart']} style={{height: '200vh'}}>
+				<div style={{height:'200vh', marginTop:'0vh'}}>
+					<img src="/img/ganart/ganart.jpg" style={{height:'inherit',}} alt=""/>
+				</div>
+				<div className='words' style={{marginTop:'35vh', maxWidth: '39vw'}}>
+					<Template 
+						props={{ index: index.ganart}}
+					/>
+				</div>
+			</section>
+
+
+			{/* <section className="ganart" style={{height: '200vh'}} ref={refAggregate['ganart']}>
 				<div className="words" style={{top: '50vh', transform: 'translateY(-50%)', right: '10vw', maxWidth: '40vw'}}>
 					<Template 
 						props={{ index: index.ganart, headerFontFamily: config[index.ganart].headerFont}}
 					/>
 				</div>
 				<img src='/img/ganart/ganart.jpg' style={{left: '3vw', top: '5vh'}}/>
-			</section>
+			</section> */}
 
 			<div 
 				style={{
-					marginTop: '15vh',position:'absolute', height:'30vh', width:'100vw', 
+					marginTop: '15vh',position:'absolute', height:'40vh', width:'100vw', 
 					backgroundColor:'#0ABAB5', color:'white', textAlign:'center',
 					borderBottom: '12px solid #0ABAB5',
  				}}>
-				<h1 style={{fontWeight: '200', fontSize: '3vh', lineHeight:'30vh'}}>
+				<h1 style={{fontWeight: '200', fontSize: '2.5vh', lineHeight:'40vh'}}>
 					&copy; Copyright 2021 - Zhenda Li
 				</h1>
 			</div>
