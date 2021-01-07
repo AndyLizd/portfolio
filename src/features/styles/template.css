@@ -37,8 +37,12 @@
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    align-items: flex-end;
 }
 section .words{
     max-width: 50vw;
     padding: 0;
+}
+section .img-div{
+    overflow: hidden;
 }

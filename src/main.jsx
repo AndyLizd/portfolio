@@ -178,9 +178,9 @@ const renderFeatureSummary = (index) => (
 function Main() {
 	
 	// headerState: -1, show name modules
-	const [headerState, setHeaderState] = useState(-1);
+	const [headerState, setHeaderState] = useState(5);
 	// jumpToState: -1, show home page
-	const [pageState, setPageState] = useState('home');
+	const [pageState, setPageState] = useState('features');
 	// loadingState: 1, loading,
 	const [loadingState, setLoadingState] = useState(1);
 	
