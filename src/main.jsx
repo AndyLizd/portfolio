@@ -178,9 +178,9 @@ const renderFeatureSummary = (index) => (
 function Main() {
 	
 	// headerState: -1, show name modules
-	const [headerState, setHeaderState] = useState(5);
+	const [headerState, setHeaderState] = useState(-1);
 	// jumpToState: -1, show home page
-	const [pageState, setPageState] = useState('features');
+	const [pageState, setPageState] = useState('home');
 	// loadingState: 1, loading,
 	const [loadingState, setLoadingState] = useState(1);
 	
@@ -198,7 +198,7 @@ function Main() {
 			});
 		}
 
-		setTimeout(() => setLoadingState(0), 6000);
+		setTimeout(() => setLoadingState(0), 5000);
 	}, []);
 
 	useEffect(() => {

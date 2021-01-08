@@ -4,8 +4,6 @@
     --p-font-weight: 100;
 }
 
-
-
 .text{
     /* position: absolute; */
     /* top: 0;
@@ -31,18 +29,3 @@
 }
 
 
-.features-page section{
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-items: flex-end;
-}
-section .words{
-    max-width: 50vw;
-    padding: 0;
-}
-section .img-div{
-    overflow: hidden;
-}

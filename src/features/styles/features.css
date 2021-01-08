@@ -1,15 +1,25 @@
-.scrollable {
+/* .scrollable {
     height: 100vh;
     width: 100vw;
     overflow: auto;
-}
+} */
 
-.feature-page section {
-    width: auto;
+
+.features-page section{
     overflow: hidden;
-    border: 0.1rem solid white;
+    width: auto;
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    /* border: 0.1rem solid white; */
 }
-
-.button {
-    display: inline-block;
+section .words{
+    max-width: 50vw;
+    padding: 0;
+}
+section .img-div{
+    overflow: hidden;
 }
