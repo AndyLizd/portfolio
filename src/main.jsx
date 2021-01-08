@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import gsap from "gsap";
+import ScrollTrigger from 'gsap/ScrollTrigger'
+import Scrollbar from 'smooth-scrollbar';
 import 'boxicons';
 
 import "./main.css";
@@ -113,12 +115,13 @@ const onMouseLeave = (e, setHeaderState) => {
 			boxShadow: '',
 			overwrite: true
 		});
-		gsap.to(`.box${i} .thumbnail`, {duration: 0.25, opacity: 0.0, overwrite: true});
+		gsap.to(`.box${i} .thumbnail`, {duration: 0.5, opacity: 0.0, overwrite: true});
 		
 		gsap.to('.panel.hidden', {
 			duration: 1.5,
 			opacity: 0,
 			overwrite: true,
+			delay: 0.2,
 		}); 
 	}
 
@@ -137,7 +140,7 @@ const renderName = () => (
 		<h1 className='name'>Li</h1>
 		<h6> # Full-Stack, DevOps, A.I.</h6>
 		<div style={{display:'flex'}}>
-			<div className="icon">
+			<div className="icon" >
 				<a href="https://github.com/AndyLizd" target="_blank">
 					<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
 				</a>
@@ -192,13 +195,14 @@ function Main() {
 		gsap.from('.page-container .intro h6', {duration: 2.0, opacity: 0, x:'3vw', ease:'slow', delay: 1.5});
 		gsap.from('.page-container .intro .icon', {duration: 1.0, y:'-3vh', opacity: 0, stagger: 0.2, ease:'bounce', delay:0.5});
 		
+
 		for (let i = 0; i < boxCount; i++){
 			gsap.from(`.page-container .panel.top .box${i}`, {
-				duration:2.0, opacity: 0.0, y:`${(2*(i%2)-1)*2.5}vh`, ease:'power4', delay: 4.0,
+				duration:2.0, opacity: 0.0, y:`${(2*(i%2)-1)*2.5}vh`, ease:'power4', delay: 3.0,
 			});
 		}
 
-		setTimeout(() => setLoadingState(0), 5000);
+		setTimeout(() => setLoadingState(0), 5500);
 	}, []);
 
 	useEffect(() => {
@@ -207,78 +211,77 @@ function Main() {
 	}, [headerState]);
 
   return (
-		<>
-		{
-		(pageState === 'features') ?
-		< Features props={{startSection: config[headerState].name}}/>
-		:
-		<div className='page-container'>
-			{/* intro, name & description */}
-			<div className='intro'>
-				{headerState === -1? renderName(): renderFeatureSummary(headerState)}
-			</div>
+		<div>
+			<div className='page-container'>
+				{/* intro, name & description */}
+				<div className='intro'>
+					{headerState === -1? renderName(): renderFeatureSummary(headerState)}
+				</div>
 
-			<div className="feature">
-				{/* box underneath */}
-				{(loadingState === 1) ?
-					<></>
-					:
-					<div className='panel hidden' onMouseOut={e => onMouseLeave(e, setHeaderState)}>
-						{config.map((value, index) => 
+				<div className="feature">
+					{/* box underneath */}
+					{(loadingState === 1) ?
+						<></>
+						:
+						<div className='panel hidden' onMouseOut={e => onMouseLeave(e, setHeaderState)}>
+							{config.map((value, index) => 
+								<div
+									className={`box hidden`}
+									style={{...defaultBoxStyle,}}
+									onMouseOver={e => onMouseEnter(e, index, setHeaderState)}
+									onClick={e => onClickFeature(e, index, setPageState)}
+									key={index.toString()+' box hident'}
+								/>
+							)}
+						</div>
+					}
+			
+					{/* box on top */}
+					<div className='panel top'>
+					{config.map((value, index) => 
 							<div
-								className={`box hidden`}
-								style={{...defaultBoxStyle, cursor:'pointer'}}
-								onMouseOver={e => onMouseEnter(e, index, setHeaderState)}
-								onClick={e => onClickFeature(e, index, setPageState)}
-								key={index.toString()+' box hident'}
-							/>
+								style={{
+									...defaultBoxStyle, 
+									backgroundColor: computeHslColor(defaultHue, 0, index, boxCount),
+								}}
+								className={`box box${index}`}
+								key={index.toString()+' box'}
+							>
+								{/* <div className='thumbnail' 
+									style={{
+										backgroundImage: `url(${config[index].thumbnail})`,
+										// filter: 'grayscale(100%)'
+									}}
+								/> */}
+								
+								{
+									(config[index].thumbanilType === 'video' ?
+										<div className='thumbnail'>
+											<video 
+												src={`${config[index].thumbnail}`} autoPlay muted loop 
+												style={{height:'inherit'}}
+											/>
+										</div>
+										:
+										<div className='thumbnail' 
+											style={{
+												backgroundImage: `url(${config[index].thumbnail})`,
+												// filter: 'grayscale(100%)'
+											}}
+										/> 
+									)
+								}
+
+							</div>	
 						)}
 					</div>
-				}
-		
-				{/* box on top */}
-				<div className='panel top'>
-				{config.map((value, index) => 
-						<div
-							style={{
-								...defaultBoxStyle, 
-								backgroundColor: computeHslColor(defaultHue, 0, index, boxCount),
-							}}
-							className={`box box${index}`}
-							key={index.toString()+' box'}
-						>
-							{/* <div className='thumbnail' 
-								style={{
-									backgroundImage: `url(${config[index].thumbnail})`,
-									// filter: 'grayscale(100%)'
-								}}
-							/> */}
-							
-							{
-								(config[index].thumbanilType === 'video' ?
-									<div className='thumbnail'>
-										<video 
-											src={`${config[index].thumbnail}`} autoPlay muted loop 
-											style={{height:'inherit'}}
-										/>
-									</div>
-									:
-									<div className='thumbnail' 
-										style={{
-											backgroundImage: `url(${config[index].thumbnail})`,
-											// filter: 'grayscale(100%)'
-										}}
-									/> 
-								)
-							}
-
-						</div>	
-					)}
 				</div>
 			</div>
+			
+		
+			{/* < Features props={{}}/> */}
+			
 		</div>
-		}
-		</>
   );
 }
 

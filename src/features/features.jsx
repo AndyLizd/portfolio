@@ -74,14 +74,14 @@ const dynamicWordsScroll = (sectionName, fromBottomMarginVh) => {
 		start: '-100% 85%',
 		end: 'center 30%',
 		markers: false,
-		scrub: 1.5,
+		scrub: 0.5,
 		
 	};
 
 	gsap.from(wordsSelector, {scrollTrigger: scrollTrigger, marginBottom: `${fromBottomMarginVh}vh`, opacity: '0.8'});
 }
 
-const sfdispatchAnimate = () => {
+export const sfdispatchAnimate = () => {
 	const selectorPrefix = '.features-page .sfdispatch';
 	const wordsSelector = `${selectorPrefix} .words`;
 	const videoSelector = `${selectorPrefix} .video-div`;
@@ -93,24 +93,24 @@ const sfdispatchAnimate = () => {
 				trigger: videoSelector, 
 				start:'-300px bottom',
 				end: 'center top',
-				scrub: 1.0, 
+				scrub: 0.5, 
 				markers:false,
 			}, 
 		},
 	);
 }
 
-const skillsAnimate = () => {
+export const skillsAnimate = () => {
 	staticImgScroll('skills', 75);
 	dynamicWordsScroll('skills', -20);
 }
 
-const recommenderAnimate = () => {
+export const recommenderAnimate = () => {
 	staticImgScroll('recommender', 70);
 	dynamicWordsScroll('recommender', -20);
 }
 
-const starlinkAnimate = () => {
+export const starlinkAnimate = () => {
 	const selectorPrefix = '.features-page .starlink';
 	const imgSelector = `${selectorPrefix} .img-div img`;
 	const wordsSelector = `${selectorPrefix} .words`;
@@ -141,7 +141,7 @@ const starlinkAnimate = () => {
 	})
 }
 
-const gliderAnimate = () => {
+export const gliderAnimate = () => {
 	const selectorPrefix = '.features-page .glider';
 	const wordsSelector = `${selectorPrefix} .words`;
 	const secondaryDivSelector = `${selectorPrefix} .secondary-img-div`;
@@ -166,13 +166,13 @@ const gliderAnimate = () => {
 		start: 'top 85%',
 		end: 'center top',
 		markers: false,
-		scrub: 1.5,
+		scrub: 0.5,
 	};
 	
 	gsap.from(wordsSelector, {scrollTrigger: scrollTrigger, y:'30%', opacity: '0.8'});
 }
 
-const ganartAnimate = () => {
+export const ganartAnimate = () => {
 	const selectorPrefix = '.features-page .ganart';
 	const wordsSelector = `${selectorPrefix} .words`;
 	const imgSelector = `${selectorPrefix} .img-div img`;
@@ -180,31 +180,27 @@ const ganartAnimate = () => {
 	const scrollTrigger = {
 		trigger: wordsSelector,
 		start: 'center center',
-		end: '400% center',
+		end: '580% center',
 		scrub: true,
 		pin: wordsSelector,
 		markers: false,
-		anticipatePin: 1,
 	}
 	gsap.from(imgSelector, {scrollTrigger: scrollTrigger, opacity: 0.2})
 
 }
 
-const educationAnimate = () => {
+export const educationAnimate = () => {
 	const selectorPrefix = '.features-page .education';
 	const backgroundSelector = `${selectorPrefix} video`;
 	const wordsSelector =  `${selectorPrefix} .words`;
 	
-	// gsap.from(backgroundSelector, {duration: 2.5, top: '100vh', ease:'power4'});
-	// gsap.from(wordsSelector, {duration: 2, opacity: 0, delay: 2});
-
 	const tl = gsap.timeline({scrollTrigger: selectorPrefix});
 	tl.from(backgroundSelector, {duration: 2.5, top:'100vh', ease: 'power4'})
-		.from(backgroundSelector, {duration: 1.5, opacity: 1})
-		.from(wordsSelector, {duration: 2, opacity: 0});
+		.from(backgroundSelector, {duration: 1.0, opacity: 1})
+	// 	.from(wordsSelector, {duration: 2, opacity: 0});
 }
 
-function Features({props}) {
+export function Features({props}) {
 
 	const refAggregate = {};
 	refAggregate['education'] = useRef(null);
@@ -216,39 +212,35 @@ function Features({props}) {
 	refAggregate['sfdispatch'] = useRef(null);
 	refAggregate['others'] = useRef(null);
 
-	const mainRef = useRef(null);
 	
 	useEffect(() => {
 		// window.document.location.hash = '';
 		// window.document.location.hash = '#ganid';
-		
 		// window.scrollTo(0, refAggregate['ganart'].current.getBoundingClientRect().y)
+		
+		// gsap.registerPlugin(ScrollTrigger);
+		// smoothScrollSetup(mainRef);
+		// ScrollTrigger.defaults({scroller: '.scrollable'});
 
+		// // animation
+		// educationAnimate();
+		// skillsAnimate();
+		// sfdispatchAnimate();
+		// recommenderAnimate();
+		// starlinkAnimate();		
+		// gliderAnimate();
+		// ganartAnimate();
 		
-		gsap.registerPlugin(ScrollTrigger);
-		
-		smoothScrollSetup(mainRef);
-		
-		// animation
-		educationAnimate();
-		skillsAnimate();
-		sfdispatchAnimate();
-		recommenderAnimate();
-		starlinkAnimate();		
-		gliderAnimate();
-		ganartAnimate();
-		
-
 		// must put at the end, because the gsap pin above will rewrite ref's y coordinate value
-		refAggregate[props.startSection].current.scrollIntoView({});		
+		// refAggregate[props.startSection].current.scrollIntoView({});	
 	}, [])
 
 	return (
-		<div ref={mainRef} className='scrollable'>
+		<div>
 			<div className='features-page'>
-				<div style={{marginTop: '2.5vh', marginRight: '0.8vw', position:'fixed', right: 0, zIndex: 100}}>
+				{/* <div style={{marginTop: '2.5vh', marginRight: '0.8vw', position:'fixed', right: 0, zIndex: 100}}>
 					<a href="/" className="button" >Home</a>
-				</div>
+				</div> */}
 
 
 				<span ref={refAggregate['others']}></span>
@@ -347,7 +339,7 @@ function Features({props}) {
 				</section>
 
 				{/* A.I. Soaring */}
-				<section className='glider' ref={refAggregate['glider']}>
+				<section className='glider' id='gliderId' ref={refAggregate['glider']}>
 					<div 
 						style={{
 							marginTop: '0vh',
@@ -383,13 +375,33 @@ function Features({props}) {
 
 				{/* footer copyright */}
 				<div 
-					id={'ganid'} 
 					style={{
-						marginTop: '15vh',position:'absolute', height:'40vh', width:'100vw', 
+						marginTop: '15vh',position:'absolute', height:'50vh', width:'100vw', 
 						backgroundColor:'#0ABAB5', color:'white', textAlign:'center',
 						borderBottom: '12px solid #0ABAB5',
-					}}>
-					<h1 style={{fontWeight: '200', fontSize: '2.5vh', lineHeight:'40vh'}}>
+					}}>	
+						<div style={{display: 'flex', flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}>			
+							<h1 className='name' style={{fontFamily:'Shadows Into Light', fontSize:'12vh', margin:'3vh'}}>Zhenda Li</h1>
+							<h2 style={{fontWeight: '200', fontSize: '3vh', marginBottom: '2vh'}}>contact me: andylizd@outlook.com </h2>
+							<div style={{display:'flex', justifyContent:'space-around', width: '15vw', margin:'1.5vh'}}>
+								<div className="icon" >
+									<a href="https://github.com/AndyLizd" target="_blank">
+										<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
+									</a>
+								</div>
+								<div className="icon">
+									<a href="https://www.linkedin.com/in/zhenda-li/" target="_blank">
+										<box-icon type='logo' color='white' name='linkedin' animation='flashing-hover'></box-icon>
+									</a>
+								</div>
+								<div className="icon">
+									<a href="mailto: andylizd@outlook.com" target="_blank">
+										<box-icon name='envelope-open' type='solid' color='white' animation='flashing-hover'></box-icon>
+									</a>
+								</div>
+							</div>
+						</div>
+					<h1 style={{fontWeight: '200', fontSize: '2.5vh', margin:'5vh'}}>
 						&copy; Copyright 2021 - Zhenda Li
 					</h1>
 				</div>
@@ -400,4 +412,4 @@ function Features({props}) {
 }
 
 
-export default Features;
+// export default Features;

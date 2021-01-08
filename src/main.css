@@ -14,11 +14,8 @@ body {
     background-color: var(--second-color);
     justify-content: space-evenly;
     align-items: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    height: 100vh;
+    width: 100vw;
 }
 
 .intro{
@@ -40,15 +37,18 @@ body {
     margin: 1vh;
     font-family: var(--p-font-family);
 }
-.intro .description.name-bundle{
+.description.name-bundle{
     margin-left: 5vw;
     margin-top: 8vh;
 }
-.intro .description .name {
+.description .name {
     font-weight: 800;
     font-size: 15vh;
     margin: -12vh;
     font-family: 'Shadows Into Light', cursive;
+}
+.description .icon {
+    margin: 0;
 }
 
 
