@@ -19,21 +19,31 @@ const onClick = (sectionRef) => {
 }
 
 const smoothScrollSetup = (mainRef) => {
-	// Smooth scroll setup
-	const bodyScrollBar = Scrollbar.init(mainRef.current, { damping: 0.06 });
-	
-	bodyScrollBar.setPosition(0, 0);
-	bodyScrollBar.track.xAxis.element.remove();
+	const container = mainRef.current;
 
-	// How to get them to work together
-	ScrollTrigger.scrollerProxy('body', {
+	// specifiy to use the mainRef element's scrollbar, 
+	const bodyScrollbar = Scrollbar.init(container, {damping: 0.05, delegateTo: container});
+	// bodyScrollbar.track.yAxis.element.remove();
+
+	ScrollTrigger.scrollerProxy(container, {
 		scrollTop(value) {
 			if (arguments.length) {
-				bodyScrollBar.scrollTop = value;
+				bodyScrollbar.scrollTop = value;
 			}
-			return bodyScrollBar.scrollTop;
+			return bodyScrollbar.scrollTop;
+		},
+		getBoundingClientRect() {
+			return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
 		}
 	});
+
+	// optimize the performance of scroll, without it, the pin functionality is terrible
+	bodyScrollbar.addListener(ScrollTrigger.update);
+
+	// since we are using the scrollbar of scrollable, we need to
+	// add {scroller: '.scrollable'} to every ScrollTrigger,
+	// an easy way to do it is ...
+	ScrollTrigger.defaults({scroller: '.scrollable'});  
 }
 
 
@@ -65,6 +75,7 @@ const dynamicWordsScroll = (sectionName, fromBottomMarginVh) => {
 		end: 'center 30%',
 		markers: false,
 		scrub: 1.5,
+		
 	};
 
 	gsap.from(wordsSelector, {scrollTrigger: scrollTrigger, marginBottom: `${fromBottomMarginVh}vh`, opacity: '0.8'});
@@ -111,6 +122,7 @@ const starlinkAnimate = () => {
 			end: '-30% top',
 			markers: false,
 			scrub: false,
+			
 		},
 		opacity: 0,
 		duration: 2,
@@ -122,9 +134,8 @@ const starlinkAnimate = () => {
 			start: '40% 50%',
 			end: '350% center',
 			pin: selectorPrefix,
-			scrub: 0.5,
+			scrub: true,
 			markers: false,
-			anticipatePin: 1,
 		},
 		width: 0,
 	})
@@ -216,7 +227,7 @@ function Features({props}) {
 		
 		gsap.registerPlugin(ScrollTrigger);
 		
-		// smoothScrollSetup(mainRef);
+		smoothScrollSetup(mainRef);
 		
 		// animation
 		educationAnimate();
@@ -227,6 +238,7 @@ function Features({props}) {
 		gliderAnimate();
 		ganartAnimate();
 		
+
 		// must put at the end, because the gsap pin above will rewrite ref's y coordinate value
 		refAggregate[props.startSection].current.scrollIntoView({});		
 	}, [])
