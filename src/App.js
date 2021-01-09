@@ -59,7 +59,6 @@ function App() {
       gsap.registerPlugin(ScrollTrigger);
       smoothScrollSetup(mainRef);
 
-      
       const scrollT = {
         trigger: '#navScroll',
         scrub: false,
@@ -93,7 +92,7 @@ function App() {
           navHighlight?
             <div id="highlight" style={{top: '93vh', left: '50vw'}}>
               scroll
-              <img src='img/arrow.png' style={{transform: 'rotate(180deg)'}}></img>
+              <img src='portfolio/img/arrow.png' style={{transform: 'rotate(180deg)'}}></img>
               for details
             </div>
           :
@@ -103,7 +102,7 @@ function App() {
           navScroll?
             <div id="navScroll" style={{top: '25vh', left: '50vw'}}>
               project highlight
-              <img src='img/arrow.png' style={{transform: 'rotate(120deg) translate(40%, -15%)'}}></img>
+              <img src='portfolio/img/arrow.png' style={{transform: 'rotate(120deg) translate(40%, -15%)'}}></img>
             </div>
           :
             <></>
