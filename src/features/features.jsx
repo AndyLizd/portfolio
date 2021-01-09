@@ -14,37 +14,37 @@ for (let i = 0; i < config.length; i++) {
 	index[config[i].name] = i;
 }
 
-const onClick = (sectionRef) => {
-	sectionRef.current.scrollIntoView({ behavior: 'smooth' })
-}
+// const onClick = (sectionRef) => {
+// 	sectionRef.current.scrollIntoView({ behavior: 'smooth' })
+// }
 
-const smoothScrollSetup = (mainRef) => {
-	const container = mainRef.current;
+// const smoothScrollSetup = (mainRef) => {
+// 	const container = mainRef.current;
 
-	// specifiy to use the mainRef element's scrollbar, 
-	const bodyScrollbar = Scrollbar.init(container, {damping: 0.05, delegateTo: container});
-	// bodyScrollbar.track.yAxis.element.remove();
+// 	// specifiy to use the mainRef element's scrollbar, 
+// 	const bodyScrollbar = Scrollbar.init(container, {damping: 0.05, delegateTo: container});
+// 	// bodyScrollbar.track.yAxis.element.remove();
 
-	ScrollTrigger.scrollerProxy(container, {
-		scrollTop(value) {
-			if (arguments.length) {
-				bodyScrollbar.scrollTop = value;
-			}
-			return bodyScrollbar.scrollTop;
-		},
-		getBoundingClientRect() {
-			return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
-		}
-	});
+// 	ScrollTrigger.scrollerProxy(container, {
+// 		scrollTop(value) {
+// 			if (arguments.length) {
+// 				bodyScrollbar.scrollTop = value;
+// 			}
+// 			return bodyScrollbar.scrollTop;
+// 		},
+// 		getBoundingClientRect() {
+// 			return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+// 		}
+// 	});
 
-	// optimize the performance of scroll, without it, the pin functionality is terrible
-	bodyScrollbar.addListener(ScrollTrigger.update);
+// 	// optimize the performance of scroll, without it, the pin functionality is terrible
+// 	bodyScrollbar.addListener(ScrollTrigger.update);
 
-	// since we are using the scrollbar of scrollable, we need to
-	// add {scroller: '.scrollable'} to every ScrollTrigger,
-	// an easy way to do it is ...
-	ScrollTrigger.defaults({scroller: '.scrollable'});  
-}
+// 	// since we are using the scrollbar of scrollable, we need to
+// 	// add {scroller: '.scrollable'} to every ScrollTrigger,
+// 	// an easy way to do it is ...
+// 	ScrollTrigger.defaults({scroller: '.scrollable'});  
+// }
 
 
 const staticImgScroll = (sectionName, toHeightVh) => {
@@ -259,7 +259,7 @@ export function Features({props}) {
 						<Template props={{ index: index.others}} />
 					</div>
 					<video 
-						src='/Videos/ink_1.mp4' autoPlay muted loop 
+						src='/portfolio/Videos/ink_1.mp4' autoPlay muted loop 
 						style={{
 							position:'absolute',
 							top: 0,
@@ -279,7 +279,7 @@ export function Features({props}) {
 						className='img-div'
 						style={{height:'75vh', width:'50vw', marginBottom:'15vh'}}
 					>
-						<img src="/img/skills/skills.jpg" style={{width:'inherit',}} alt=""/>
+						<img src="/portfolio/img/skills/skills.jpg" style={{width:'inherit',}} alt=""/>
 					</div>
 					<div className='words' style={{marginBottom:'10vh'}}>
 						<Template props={{ index: index.skills}} />
@@ -295,7 +295,7 @@ export function Features({props}) {
 					</div>
 					<div className='video-div' style={{marginBottom:'25vh', width:'50vw',}}>
 						<video 
-							src='/Videos/sfdispatch.mp4' autoPlay muted loop 
+							src='/portfolio/Videos/sfdispatch.mp4' autoPlay muted loop 
 							style={{width:'inherit'}}
 						/>
 					</div>
@@ -308,7 +308,7 @@ export function Features({props}) {
 						className='img-div'
 						style={{height:'70vh', width:'50vw', marginBottom:'28vh' }}
 					>
-						<img src="/img/recommender/recommender.jpg" style={{width:'inherit'}} alt=""/>
+						<img src="/portfolio/img/recommender/recommender.jpg" style={{width:'inherit'}} alt=""/>
 					</div>
 					<div className='words' style={{marginBottom:'10vh'}}>
 						<Template props={{ index: index.recommender}} />
@@ -322,7 +322,7 @@ export function Features({props}) {
 						style={{width:'50vw'}}
 					>
 						<img 
-							src="/img/starlink/moon.png" 
+							src="/portfolio/img/starlink/moon.png" 
 							style={{
 								width:'50vw', 
 								position:'absolute', 
@@ -354,11 +354,11 @@ export function Features({props}) {
 							<Template props={{ index: index.glider}} />
 						</div>
 						<div className="secondary-img-div" style={{height:'52vh', width:'35vw', marginBottom:'3vh', overflow:'hidden'}}>
-							<img src="/img/glider/glider_2.png" style={{width:'inherit'}}/>
+							<img src="/portfolio/img/glider/glider_2.png" style={{width:'inherit'}}/>
 						</div>
 					</div>
 					<div className='img-div' style={{height:'100vh', width:'35vw', marginBottom: 0}}>
-						<img src="/img/glider/glider.jpg" style={{width:'inherit', }} alt=""/>
+						<img src="/portfolio/img/glider/glider.jpg" style={{width:'inherit', }} alt=""/>
 					</div>
 				</section>
 
@@ -366,7 +366,7 @@ export function Features({props}) {
 				{/* Art by GANs */}
 				<section className='ganart' ref={refAggregate['ganart']} style={{height: '250vh', alignItems: 'flex-start'}}>
 					<div className='img-div' style={{marginTop: '50vh', height:'200vh', width:'42vw'}}>
-						<img src="/img/ganart/ganart.jpg" style={{height:'inherit'}} alt=""/>
+						<img src="/portfolio/img/ganart/ganart.jpg" style={{height:'inherit'}} alt=""/>
 					</div>
 					<div className='words' style={{marginTop:'20vh', maxWidth:'40VW'}}>
 						<Template props={{ index: index.ganart}} />
@@ -382,7 +382,7 @@ export function Features({props}) {
 					}}>	
 						<div style={{display: 'flex', flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}>			
 							<h1 className='name' style={{fontFamily:'Shadows Into Light', fontSize:'12vh', margin:'3vh'}}>Zhenda Li</h1>
-							<h2 style={{fontWeight: '200', fontSize: '3vh', marginBottom: '2vh'}}>contact me: andylizd@outlook.com </h2>
+							<h2 style={{fontWeight: '200', fontSize: '3vh', marginBottom: '2vh'}}>contact: andylizd@outlook.com </h2>
 							<div style={{display:'flex', justifyContent:'space-around', width: '15vw', margin:'1.5vh'}}>
 								<div className="icon" >
 									<a href="https://github.com/AndyLizd" target="_blank">

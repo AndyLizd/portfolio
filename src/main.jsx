@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import gsap from "gsap";
-import ScrollTrigger from 'gsap/ScrollTrigger'
-import Scrollbar from 'smooth-scrollbar';
 import 'boxicons';
 
 import "./main.css";
 import config from "./boxConfig";
 
-import Features from './features/features';
 
 // config
 const boxCount = config.length;
@@ -88,14 +85,14 @@ const onMouseEnter = (e, index, setHeaderState) => {
 	}
 
 	gsap.to(`.box${index} .thumbnail`, {
-		duration: 1.5, 
+		duration: 2.5, 
 		opacity: 1.0, 
 		overwrite: true, 
-		delay: 0.5
+		delay: 0.6
 	});
 
 	gsap.to(`.panel.hidden`, {
-		duration: 1.5,
+		duration: 2,
 		opacity: 1,
 		boxShadow: `0 10.5px 60.2px -10px rgba(255,255,255, 0.349),
 								${-50 + index/boxCount*2*50}px 14.6px 232.2px -10px rgba(255,255,255, 0.497),	
@@ -117,13 +114,13 @@ const onMouseLeave = (e, setHeaderState) => {
 		});
 		gsap.to(`.box${i} .thumbnail`, {duration: 0.5, opacity: 0.0, overwrite: true});
 		
-		gsap.to('.panel.hidden', {
-			duration: 1.5,
-			opacity: 0,
-			overwrite: true,
-			delay: 0.2,
-		}); 
 	}
+  gsap.to('.panel.hidden', {
+    duration: 1.5,
+    opacity: 0,
+    overwrite: true,
+    delay: 0.2,
+  }); 
 
 	gsap.from('.page-container .intro', {duration:0.5, opacity: 0, ease:'power4'})
 
@@ -191,7 +188,7 @@ function Main() {
 		
 		gsap.defaults({overwrite: true});
 
-		gsap.from('.page-container .intro .name', {duration: 1.5, opacity: 0.0, y: '-5vh', ease:'power4', stagger: 0.5});
+		gsap.from('.page-container .intro .name', {duration: 2, opacity: 0.0, y: '-10vh', ease:'power4', stagger: 0.5});
 		gsap.from('.page-container .intro h6', {duration: 2.0, opacity: 0, x:'3vw', ease:'slow', delay: 1.5});
 		gsap.from('.page-container .intro .icon', {duration: 1.0, y:'-3vh', opacity: 0, stagger: 0.2, ease:'bounce', delay:0.5});
 		

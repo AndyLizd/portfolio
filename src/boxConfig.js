@@ -1,7 +1,7 @@
 const config = [
   {
     name: "sfdispatch",
-    thumbnail: 'portfolio/img/sfdispatch/sfdispatch_thumbnail.jpg',
+    thumbnail: '/portfolio/img/sfdispatch/sfdispatch_thumbnail.jpg',
     thumbnailType: 'img',
     head: 'San Francisco Dispatch',
     summary: 'dispatch & delivery management web app',
@@ -17,7 +17,7 @@ const config = [
 
   {
     name: "recommender",
-    thumbnail: 'portfolio/img/recommender/recommender_thumbnail.jpg',
+    thumbnail: '/portfolio/img/recommender/recommender_thumbnail.jpg',
     thumbnailType: 'img',
     head: 'Job Recommendation',
     summary: 'job recommendation engine and web service',
@@ -52,7 +52,7 @@ const config = [
 
   {
     name: "starlink",
-    thumbnail: './portfolio/img/starlink/starlink_thumbnail.jpg',
+    thumbnail: '/portfolio/img/starlink/starlink_thumbnail.jpg',
     thumbnailType: 'img',
     head: 'Star Link',
     summary: 'satellite trajectory live animation website based on React',
@@ -67,7 +67,7 @@ const config = [
 
   {
     name: "ganart",
-    thumbnail: 'portfolio/img/ganart/ganart_thumbnail.jpg',
+    thumbnail: '/portfolio/img/ganart/ganart_thumbnail.jpg',
     thumbnailType: 'img',
     head: 'Art by GANs',
     summary: 'artificial intelligent generator of paintings and visual art',
@@ -82,7 +82,7 @@ const config = [
 
   {
     name: "education",
-    thumbnail: 'portfolio/img/education/education_thumbnail.jpg',
+    thumbnail: '/portfolio/img/education/education_thumbnail.jpg',
     thumbnailType: 'img',
     head: 'Education',
     summary: 'M.S. in Computer Science, Georgia Tech',
@@ -97,7 +97,7 @@ const config = [
   {
     name: "skills",
     // thumbnail: '/img/skills/skills_thumbnail.jpg',
-    thumbnail: 'portfolio/Videos/ink_2.mp4',
+    thumbnail: '/portfolio/Videos/ink_2.mp4',
     thumbanilType: 'video',
     head: 'Skills',
     summary: 'what I\'ve got',
@@ -115,7 +115,7 @@ const config = [
 
   {
     name: "others",
-    thumbnail: 'portfolio/img/others/others_thumbnail.jpg',
+    thumbnail: '/portfolio/img/others/others_thumbnail.jpg',
     thumbnailType: 'img',
     head: 'Certification, Awards, & Others',
     summary: 'click thumbnail to find out more',

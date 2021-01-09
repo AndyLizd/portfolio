@@ -45,32 +45,29 @@ function App() {
   const mainRef = useRef(null);
 
   const [loading, setLoading] = useState(true);
-  const [navHighlight, setNavHighlight] = useState(false);
-  const [navScroll, setNavScroll] = useState(false);
   
   useEffect(() => {
     // disable animation and scrolling at the openning
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const scrollT = {
+      trigger: '#navScroll',
+      scrub: false,
+      markers: false,
+      start: '-20 top',
+      end: '120 top',
+      scroller: '.scrollable'
+    };
+    
+    const tl = gsap.timeline();
+    tl.from('#navScroll', {duration: 3.0, opacity: 0.0, delay: 3.5})
+    .from('#highlight', {duration: 1.0, opacity: 0.0,})
+    
     setTimeout(() => {
       setLoading(false)
-      setNavHighlight(true);
-      setNavScroll(true);
-
       
-      gsap.registerPlugin(ScrollTrigger);
       smoothScrollSetup(mainRef);
-
-      const scrollT = {
-        trigger: '#navScroll',
-        scrub: false,
-        markers: false,
-        start: '-20 top',
-        end: '120 top',
-        scroller: '.scrollable'
-      };
       
-      const tl = gsap.timeline();
-      tl.from('#navScroll', {duration: 1.0, opacity: 0.0, delay:0.15})
-      .from('#highlight', {duration: 1.0, opacity: 0.0,})
       gsap.to('.nav-helper', {duration: 2, scrollTrigger: scrollT, opacity: 0});
       
       educationAnimate();
@@ -88,25 +85,16 @@ function App() {
     <div ref={mainRef} className='scrollable' onScroll={(e) => onScroll(e)}>
       {/* new user nav-helper */}
       <div className='nav-helper'>
-        {
-          navHighlight?
-            <div id="highlight" style={{top: '93vh', left: '50vw'}}>
-              scroll
-              <img src='./portfolio/img/arrow.png' style={{transform: 'rotate(180deg)'}}></img>
-              for details
-            </div>
-          :
-            <></>
-        }
-        {
-          navScroll?
-            <div id="navScroll" style={{top: '25vh', left: '50vw'}}>
-              project highlights
-              <img src='./portfolio/img/arrow.png' style={{transform: 'rotate(120deg) translate(40%, -15%)'}}></img>
-            </div>
-          :
-            <></>
-        }
+        navHighlight?
+          <div id="highlight" style={{top: '93vh', left: '50vw'}}>
+            scroll
+            <img src='/portfolio/img/arrow.png' style={{transform: 'rotate(180deg)'}} alt=''></img>
+            for details
+          </div>
+          <div id="navScroll" style={{top: '25vh', left: '50vw'}}>
+            project highlight
+            <img src='/portfolio/img/arrow.png' style={{transform: 'rotate(120deg) translate(40%, -15%)'}} alt=''></img>
+          </div>
       </div>
 
       < Main />
