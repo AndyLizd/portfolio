@@ -85,16 +85,15 @@ function App() {
     <div ref={mainRef} className='scrollable' onScroll={(e) => onScroll(e)}>
       {/* new user nav-helper */}
       <div className='nav-helper'>
-        navHighlight?
-          <div id="highlight" style={{top: '93vh', left: '50vw'}}>
-            scroll
-            <img src='/portfolio/img/arrow.png' style={{transform: 'rotate(180deg)'}} alt=''></img>
-            for details
-          </div>
-          <div id="navScroll" style={{top: '25vh', left: '50vw'}}>
-            project highlight
-            <img src='/portfolio/img/arrow.png' style={{transform: 'rotate(120deg) translate(40%, -15%)'}} alt=''></img>
-          </div>
+        <div id="highlight" style={{top: '93vh', left: '50vw'}}>
+          scroll
+          <img src='/portfolio/img/arrow.png' style={{transform: 'rotate(180deg)'}} alt=''></img>
+          for details
+        </div>
+        <div id="navScroll" style={{top: '25vh', left: '50vw'}}>
+          project highlight
+          <img src='/portfolio/img/arrow.png' style={{transform: 'rotate(120deg) translate(40%, -15%)'}} alt=''></img>
+        </div>
       </div>
 
       < Main />

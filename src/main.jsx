@@ -188,14 +188,14 @@ function Main() {
 		
 		gsap.defaults({overwrite: true});
 
-		gsap.from('.page-container .intro .name', {duration: 2, opacity: 0.0, y: '-10vh', ease:'power4', stagger: 0.5});
+		gsap.from('.page-container .intro .name', {duration: 2, opacity: 0.0, y: '-25vh', ease:'power4', stagger: 0.75, delay:0.5});
 		gsap.from('.page-container .intro h6', {duration: 2.0, opacity: 0, x:'3vw', ease:'slow', delay: 1.5});
 		gsap.from('.page-container .intro .icon', {duration: 1.0, y:'-3vh', opacity: 0, stagger: 0.2, ease:'bounce', delay:0.5});
 		
 
 		for (let i = 0; i < boxCount; i++){
 			gsap.from(`.page-container .panel.top .box${i}`, {
-				duration:2.0, opacity: 0.0, y:`${(2*(i%2)-1)*2.5}vh`, ease:'power4', delay: 3.0,
+				duration:2.0, opacity: 0.0, y:`${(2*(i%2)-1)*2.5}vh`, ease:'power4', delay: 3.5,
 			});
 		}
 

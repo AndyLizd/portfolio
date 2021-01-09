@@ -12,7 +12,8 @@
     /* border: 0.1rem solid white; */
 }
 section .words{
-    max-width: 50vw;
+    /* max-width: 50vw; */
+    min-width: '500px';
     padding: 0;
 }
 section .img-div{

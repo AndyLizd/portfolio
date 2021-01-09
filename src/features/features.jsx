@@ -383,7 +383,7 @@ export function Features({props}) {
 						<div style={{display: 'flex', flexDirection:'column', justifyContent:'space-around', alignItems:'center'}}>			
 							<h1 className='name' style={{fontFamily:'Shadows Into Light', fontSize:'12vh', margin:'3vh'}}>Zhenda Li</h1>
 							<h2 style={{fontWeight: '200', fontSize: '3vh', marginBottom: '2vh'}}>contact: andylizd@outlook.com </h2>
-							<div style={{display:'flex', justifyContent:'space-around', width: '15vw', margin:'1.5vh'}}>
+							<div style={{display:'flex', justifyContent:'space-around', width: '15vw', margin:'1vh'}}>
 								<div className="icon" >
 									<a href="https://github.com/AndyLizd" target="_blank">
 										<box-icon type='logo' color='white' name='github' animation='flashing-hover'></box-icon>
