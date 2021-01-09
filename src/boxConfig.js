@@ -34,7 +34,7 @@ const config = [
 
   {
     name: "glider",
-    thumbnail: 'portfolio/img/glider/glider_thumbnail.jpg',
+    thumbnail: '/portfolio/img/glider/glider_thumbnail.jpg',
     thumbnailType: 'img',
     head: 'A.I. Soaring',
     summary: 'A.I. research in aerial robotics decision-making algorithm',
@@ -52,7 +52,7 @@ const config = [
 
   {
     name: "starlink",
-    thumbnail: 'portfolio/img/starlink/starlink_thumbnail.jpg',
+    thumbnail: './portfolio/img/starlink/starlink_thumbnail.jpg',
     thumbnailType: 'img',
     head: 'Star Link',
     summary: 'satellite trajectory live animation website based on React',
